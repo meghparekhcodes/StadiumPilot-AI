@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}StadiumPilot AI - Home{% endblock %}
+
+{% block content %}
+<div class="hero-section fade-in">
+    <h1 class="gradient-text">StadiumPilot AI</h1>
+    <p class="subtitle">The AI Operating System for Smart Stadiums</p>
+</div>
+
+<div class="role-grid fade-in-delay">
+    
+    <!-- Fan Card -->
+    <div class="role-card glass-card">
+        <div class="card-icon"><i class="fa-solid fa-user-group"></i></div>
+        <h2>Fan</h2>
+        <p>Navigate the stadium, find amenities, and get instant answers.</p>
+        <a href="{{ url_for('fan.dashboard') }}" class="btn-primary">Continue</a>
+    </div>
+
+    <!-- Volunteer Card -->
+    <div class="role-card glass-card">
+        <div class="card-icon"><i class="fa-solid fa-hands-helping"></i></div>
+        <h2>Volunteer</h2>
+        <p>Get operational guidance, report incidents, and help fans effectively.</p>
+        <a href="{{ url_for('volunteer.dashboard') }}" class="btn-primary">Continue</a>
+    </div>
+
+    <!-- Security Card -->
+    <div class="role-card glass-card">
+        <div class="card-icon"><i class="fa-solid fa-shield-halved"></i></div>
+        <h2>Security</h2>
+        <p>Monitor crowds, respond to emergencies, and receive AI safety alerts.</p>
+        <a href="{{ url_for('security.dashboard') }}" class="btn-primary">Continue</a>
+    </div>
+
+    <!-- Organizer Card -->
+    <div class="role-card glass-card">
+        <div class="card-icon"><i class="fa-solid fa-chart-line"></i></div>
+        <h2>Organizer</h2>
+        <p>Access live KPIs, crowd density insights, and strategic recommendations.</p>
+        <a href="{{ url_for('organizer.dashboard') }}" class="btn-primary">Continue</a>
+    </div>
+
+</div>
+
+<!-- Simulation Center Link -->
+<div class="simulation-link-container fade-in-delay">
+    <a href="{{ url_for('simulation.center') }}" class="btn-secondary">
+        <i class="fa-solid fa-bolt"></i> Enter Simulation Center
+    </a>
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Volunteer Dashboard - StadiumPilot AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-header fade-in">
+    <h2>Volunteer Dashboard</h2>
+    <p>Operational guidance and incident reporting.</p>
+</div>
+
+<div class="dashboard-grid fade-in-delay">
+    <div class="dashboard-panel glass-card span-2">
+        <h3>Quick Reports</h3>
+        <div class="quick-actions-grid">
+            <button class="action-btn" onclick="sendQuickMessage('Report Incident')"><i class="fa-solid fa-triangle-exclamation"></i> Report Incident</button>
+            <button class="action-btn" onclick="sendQuickMessage('Lost Child Assistance')"><i class="fa-solid fa-child"></i> Lost Child</button>
+            <button class="action-btn" onclick="sendQuickMessage('Medical Request')"><i class="fa-solid fa-kit-medical"></i> Medical Request</button>
+            <button class="action-btn" onclick="sendQuickMessage('Contact Security')"><i class="fa-solid fa-shield"></i> Contact Security</button>
+            <button class="action-btn" onclick="sendQuickMessage('Request Backup')"><i class="fa-solid fa-users"></i> Request Backup</button>
+            <button class="action-btn" onclick="sendQuickMessage('Ask AI for Guidance')"><i class="fa-solid fa-lightbulb"></i> AI Guidance</button>
+        </div>
+    </div>
+    
+    <div class="dashboard-panel glass-card">
+        <h3>Assigned Tasks</h3>
+        <ul class="task-list">
+            <li><input type="checkbox"> Guide fans at Gate 3</li>
+            <li><input type="checkbox"> Monitor Food Court A</li>
+            <li><input type="checkbox"> Check accessibility ramps</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block chat %}
+<div class="chat-container glass-card slide-up" data-role="volunteer">
+    <div class="chat-header">
+        <h4><i class="fa-solid fa-robot"></i> Volunteer AI Guide</h4>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+        <div class="message ai-message">
+            <div class="msg-content">Welcome! I'm here to provide step-by-step operational guidance. What do you need help with?</div>
+        </div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Describe incident or request guidance..." aria-label="Chat input">
+        <button id="send-btn" class="icon-btn"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulation.js') }}"></script>
+{% endblock %}

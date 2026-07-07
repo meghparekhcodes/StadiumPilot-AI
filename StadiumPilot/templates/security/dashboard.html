@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}Security Dashboard - StadiumPilot AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-header fade-in">
+    <h2>Security Dashboard</h2>
+    <p>Safety-first crowd monitoring and incident response.</p>
+</div>
+
+<div class="dashboard-grid fade-in-delay">
+    <div class="dashboard-panel glass-card span-2">
+        <h3>Command & Control</h3>
+        <div class="quick-actions-grid">
+            <button class="action-btn" onclick="sendQuickMessage('Incident Reporting')"><i class="fa-solid fa-file-contract"></i> Log Incident</button>
+            <button class="action-btn" onclick="sendQuickMessage('Crowd Monitoring')"><i class="fa-solid fa-users-viewfinder"></i> Crowd Density</button>
+            <button class="action-btn emergency-btn" onclick="sendQuickMessage('Emergency Response')"><i class="fa-solid fa-truck-fast"></i> Dispatch Emergency</button>
+            <button class="action-btn" onclick="sendQuickMessage('Suspicious Activity Reporting')"><i class="fa-solid fa-eye"></i> Suspicious Activity</button>
+            <button class="action-btn" onclick="sendQuickMessage('Gate Status')"><i class="fa-solid fa-door-open"></i> Gate Status</button>
+            <button class="action-btn" onclick="sendQuickMessage('AI Recommendations')"><i class="fa-solid fa-brain"></i> AI Safety Recs</button>
+        </div>
+    </div>
+    
+    <div class="dashboard-panel glass-card">
+        <h3>Active Alerts</h3>
+        <ul class="task-list" id="security-alerts">
+            <li class="alert-item"><i class="fa-solid fa-check text-green"></i> All systems normal</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block chat %}
+<div class="chat-container glass-card slide-up" data-role="security">
+    <div class="chat-header">
+        <h4><i class="fa-solid fa-robot"></i> Security AI Assistant</h4>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+        <div class="message ai-message">
+            <div class="msg-content">Security Copilot online. Ready to evaluate risks and provide recommendations.</div>
+        </div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Report crowd size, incidents..." aria-label="Chat input">
+        <button id="send-btn" class="icon-btn"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulation.js') }}"></script>
+{% endblock %}

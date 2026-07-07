@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Simulation Center - StadiumPilot AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-header fade-in">
+    <h2>Simulation Center</h2>
+    <p>Trigger match day events to see how StadiumPilot AI assists different roles in real-time.</p>
+</div>
+
+<div class="dashboard-grid fade-in-delay">
+    <div class="dashboard-panel glass-card span-2">
+        <h3>Trigger Events</h3>
+        <div class="quick-actions-grid">
+            {% for event_id, event in events.items() %}
+            <button class="action-btn" onclick="triggerEvent('{{ event_id }}')">
+                <i class="fa-solid fa-bolt"></i> {{ event.title }}
+            </button>
+            {% endfor %}
+        </div>
+        <div style="margin-top: 1rem;">
+            <button class="btn-secondary" onclick="clearEvents()"><i class="fa-solid fa-eraser"></i> Clear Event Log</button>
+        </div>
+    </div>
+
+    <div class="dashboard-panel glass-card">
+        <h3>Event Timeline</h3>
+        <div id="event-timeline" class="timeline">
+            <p class="text-muted">No active events.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block chat %}
+<!-- No Chat in Simulation Center, it's just a control panel -->
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function triggerEvent(eventId) {
+        fetch('/api/simulation/trigger', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({event_id: eventId})
+        })
+        .then(res => res.json())
+        .then(data => {
+            showToast(data.message, data.status === 'success' ? 'info' : 'error');
+            pollEvents();
+        });
+    }
+
+    function clearEvents() {
+        fetch('/api/simulation/clear', {method: 'POST'})
+        .then(() => pollEvents());
+    }
+
+    function pollEvents() {
+        fetch('/api/simulation/events')
+        .then(res => res.json())
+        .then(data => {
+            const container = document.getElementById('event-timeline');
+            if (data.events.length === 0) {
+                container.innerHTML = '<p class="text-muted">No active events.</p>';
+                return;
+            }
+            container.innerHTML = '';
+            data.events.forEach(event => {
+                const eventHtml = `
+                    <div class="timeline-item">
+                        <h4>${event.title}</h4>
+                        <p>${event.description}</p>
+                    </div>
+                `;
+                container.innerHTML += eventHtml;
+            });
+        });
+    }
+
+    // Initial poll
+    pollEvents();
+    // Poll every 3 seconds
+    setInterval(pollEvents, 3000);
+</script>
+<script src="{{ url_for('static', filename='js/simulation.js') }}"></script>
+{% endblock %}

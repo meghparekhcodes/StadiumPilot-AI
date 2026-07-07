@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Fan Dashboard - StadiumPilot AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-header fade-in">
+    <h2>Fan Dashboard</h2>
+    <p>Your personal stadium assistant for a seamless matchday experience.</p>
+</div>
+
+<div class="dashboard-grid fade-in-delay">
+    <!-- Quick Actions -->
+    <div class="dashboard-panel glass-card span-2">
+        <h3>Quick Actions</h3>
+        <div class="quick-actions-grid">
+            <button class="action-btn" onclick="sendQuickMessage('Where is my seat?')"><i class="fa-solid fa-chair"></i> Find Seat</button>
+            <button class="action-btn" onclick="sendQuickMessage('Find nearby food')"><i class="fa-solid fa-burger"></i> Find Food</button>
+            <button class="action-btn" onclick="sendQuickMessage('Where is the nearest washroom?')"><i class="fa-solid fa-restroom"></i> Washroom</button>
+            <button class="action-btn emergency-btn" onclick="sendQuickMessage('I need emergency help')"><i class="fa-solid fa-truck-medical"></i> Emergency SOS</button>
+            <button class="action-btn" onclick="sendQuickMessage('Lost & Found')"><i class="fa-solid fa-magnifying-glass"></i> Lost & Found</button>
+            <button class="action-btn" onclick="sendQuickMessage('Accessibility Assistance')"><i class="fa-solid fa-wheelchair"></i> Accessibility</button>
+            <button class="action-btn" onclick="sendQuickMessage('Live Translation')"><i class="fa-solid fa-language"></i> Translation</button>
+        </div>
+    </div>
+    
+    <!-- Info Panel -->
+    <div class="dashboard-panel glass-card">
+        <h3>Match Info</h3>
+        <ul class="info-list">
+            <li><strong>Match:</strong> Team A vs Team B</li>
+            <li><strong>Kickoff:</strong> 18:00 Local Time</li>
+            <li><strong>Weather:</strong> Clear, 22°C</li>
+            <li><strong>Transport:</strong> Trains running every 10 mins</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block chat %}
+<!-- Embedded Chat Interface -->
+<div class="chat-container glass-card slide-up" data-role="fan">
+    <div class="chat-header">
+        <h4><i class="fa-solid fa-robot"></i> StadiumPilot Fan AI</h4>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+        <div class="message ai-message">
+            <div class="msg-content">Hello! I'm your Fan Assistant. How can I make your matchday better?</div>
+        </div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Ask about gates, food, translation..." aria-label="Chat input">
+        <button id="send-btn" class="icon-btn"><i class="fa-solid fa-paper-plane"></i></button>
+        <button id="voice-btn" class="icon-btn" title="Voice Input (Mock)"><i class="fa-solid fa-microphone"></i></button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulation.js') }}"></script>
+{% endblock %}

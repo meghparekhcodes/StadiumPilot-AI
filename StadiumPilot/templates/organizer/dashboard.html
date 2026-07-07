@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Organizer Dashboard - StadiumPilot AI{% endblock %}
+
+{% block content %}
+<div class="dashboard-header fade-in">
+    <h2>Organizer Dashboard</h2>
+    <p>Strategic insights, analytics, and operational overview.</p>
+</div>
+
+<!-- KPI Cards -->
+<div class="kpi-grid fade-in-delay">
+    <div class="kpi-card glass-card">
+        <h4>Current Attendance</h4>
+        <div class="kpi-value">{{ kpi.current_attendance }}</div>
+    </div>
+    <div class="kpi-card glass-card">
+        <h4>Active Incidents</h4>
+        <div class="kpi-value">{{ kpi.active_incidents }}</div>
+    </div>
+    <div class="kpi-card glass-card">
+        <h4>Crowd Density</h4>
+        <div class="kpi-value">{{ kpi.crowd_density }}</div>
+    </div>
+    <div class="kpi-card glass-card">
+        <h4>Volunteer Avail.</h4>
+        <div class="kpi-value">{{ kpi.volunteer_availability }}</div>
+    </div>
+    <div class="kpi-card glass-card">
+        <h4>Parking Occ.</h4>
+        <div class="kpi-value">{{ kpi.parking_occupancy }}</div>
+    </div>
+    <div class="kpi-card glass-card">
+        <h4>Emergency Status</h4>
+        <div class="kpi-value">{{ kpi.emergency_status }}</div>
+    </div>
+</div>
+
+<div class="dashboard-grid fade-in-delay mt-2">
+    <!-- Charts -->
+    <div class="dashboard-panel glass-card">
+        <h3>Crowd Density by Gate</h3>
+        <canvas id="densityChart"></canvas>
+    </div>
+    <div class="dashboard-panel glass-card">
+        <h3>Incident Trends</h3>
+        <canvas id="incidentChart"></canvas>
+    </div>
+</div>
+
+<!-- Inject Mock Data for Charts -->
+<script>
+    const chartData = {{ chart_data | tojson }};
+</script>
+
+{% endblock %}
+
+{% block chat %}
+<div class="chat-container glass-card slide-up" data-role="organizer">
+    <div class="chat-header">
+        <h4><i class="fa-solid fa-robot"></i> Organizer AI Copilot</h4>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+        <div class="message ai-message">
+            <div class="msg-content">Organizer Copilot online. I can provide business intelligence and optimization strategies.</div>
+        </div>
+    </div>
+    <div class="chat-input-area">
+        <input type="text" id="chat-input" placeholder="Ask for insights on food courts, gates..." aria-label="Chat input">
+        <button id="send-btn" class="icon-btn"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+<script src="{{ url_for('static', filename='js/simulation.js') }}"></script>
+{% endblock %}

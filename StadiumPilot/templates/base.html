@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}StadiumPilot AI{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Professional Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="dark-mode">
+
+    <!-- Top Navigation -->
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/" style="text-decoration: none; color: inherit;">
+                <i class="fa-solid fa-stadium"></i> StadiumPilot AI
+            </a>
+        </div>
+        <div class="nav-controls">
+            <!-- Accessbility Menu -->
+            <button id="accessibility-btn" class="icon-btn" aria-label="Accessibility Options" title="Accessibility Options">
+                <i class="fa-solid fa-universal-access"></i>
+            </button>
+            <button id="theme-toggle" class="icon-btn" aria-label="Toggle Theme" title="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Accessibility Panel -->
+    <div id="accessibility-panel" class="hidden glass-panel">
+        <h4>Accessibility Options</h4>
+        <label><input type="checkbox" id="high-contrast-toggle"> High Contrast</label>
+        <label><input type="checkbox" id="large-text-toggle"> Large Text</label>
+    </div>
+
+    <!-- Notification Toast Container -->
+    <div id="toast-container"></div>
+
+    <!-- Main Content -->
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Global Chat Component (Hidden on home page, visible on dashboards) -->
+    {% block chat %}{% endblock %}
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>
