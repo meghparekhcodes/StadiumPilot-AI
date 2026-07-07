@@ -9,7 +9,7 @@ is_mock = False
 
 if api_key and api_key != "your_gemini_api_key_here":
     genai.configure(api_key=api_key)
-    model = genai.GenerativeModel('gemini-1.5-flash')
+    model = genai.GenerativeModel('gemini-2.5-flash')
 else:
     is_mock = True
 
@@ -18,9 +18,9 @@ def get_ai_response(prompt, system_prompt, role):
         return _get_mock_response(prompt, role)
     
     try:
-        # Gemini 1.5 Flash supports system instructions
+        # Gemini 2.5 Flash supports system instructions
         model = genai.GenerativeModel(
-            model_name='gemini-1.5-flash',
+            model_name='gemini-2.5-flash',
             system_instruction=system_prompt
         )
         response = model.generate_content(prompt)
